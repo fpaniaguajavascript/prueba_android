@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { Camera, CameraResultType, CameraSource, Photo } from '@capacitor/camera';
+
 
 @Component({
   selector: 'app-home',
@@ -6,7 +8,21 @@ import { Component } from '@angular/core';
   styleUrls: ['home.page.scss'],
 })
 export class HomePage {
+  image:any;
+  foto:any;
 
-  constructor() {}
+
+  takePicture = async () => {
+    this.image = await Camera.getPhoto({
+      resultType: CameraResultType.Uri,
+      source: CameraSource.Camera,
+      quality: 100
+    }).then((photo:Photo)=>{
+      this.foto=photo;
+    });
+  };
 
 }
+
+
+
